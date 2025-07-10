@@ -1,5 +1,19 @@
 # LeetCode SQL 50 Study Plan
 ## Level: Medium
+### 1174 Immediate Food Delivery 2
+```
+WITH CTE AS (SELECT customer_id, 
+        MIN(order_date) AS first_order_date,
+        CASE 
+		WHEN MIN(order_date) = customer_pref_delivery_date 
+	        THEN 1 ELSE 0 
+	END AS immidiate 
+FROM Delivery
+GROUP BY customer_id)
+
+SELECT ((SUM(immidiate)/COUNT(*))*100) AS immediate_percentage
+FROM CTE
+```
 ### 1193 Monthly Transactions 1
 ```
     SELECT
