@@ -1,3 +1,19 @@
+## Level: Medium
+### 570 Managers with at Least 5 Direct Reports
+```
+WITH CTE AS (
+    SELECT managerId,
+        COUNT(*) as count_report
+    FROM Employee
+    GROUP BY managerId
+    HAVING COUNT(*) >= 5
+)
+
+SELECT  e.name as name
+FROM 
+    CTE LEFT JOIN
+    Employee as e ON CTE.managerId = e.id
+```
 ## Level: Easy
 ### 1757. Recyclable and Low-Fat Products
 ```
