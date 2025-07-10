@@ -1,8 +1,10 @@
 ### 1757. Recyclable and Low-Fat Products
-`SELECT 
+<code>
+SELECT 
 	product_id
 FROM 
 	Products
 WHERE
 	low_fats = 'Y' 
-	and recyclable = 'Y';`
+	and recyclable = 'Y';
+</code>
