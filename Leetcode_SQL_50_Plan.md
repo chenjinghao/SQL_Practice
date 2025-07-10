@@ -10,12 +10,12 @@ WHERE
 	and recyclable = 'Y';```
 
 ### 584. Find Customer Referee
-```
-SELECT
+
+```SELECT
     name
 FROM
     Customer
 WHERE
     referee_id != 2 
-    or referee_id IS NULL;
-```
+    or referee_id IS NULL;```
+
