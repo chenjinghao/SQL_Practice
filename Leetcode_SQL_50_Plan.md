@@ -3,14 +3,14 @@
 ## Level: Medium
 ### 1070. Product Sales Analysis III
 ```
-SELECT product_id,
-	MIN(year) AS first_year,
-	quantity,
-	price
-FROM
-	Sales
-GROUP BY
-	product_id
+SELECT 
+    customer_id
+FROM 
+    Customer
+GROUP BY 
+    customer_id
+HAVING 
+    COUNT(DISTINCT product_key) = (SELECT COUNT(DISTINCT product_key) FROM Product)
 ```
 ### 550 Game Play Analysis IV
 ```
