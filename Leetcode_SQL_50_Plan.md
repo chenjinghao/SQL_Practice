@@ -1,5 +1,15 @@
 # LeetCode SQL 50 Study Plan
 ## Level: Medium
+### 550 Game Play Analysis IV
+```
+SELECT
+	ROUND(COUNT(*)/(SELECT COUNT(distinct player_id) FROM Activity),2) AS fraction
+FROM 
+	Activity AS a1 LEFT JOIN
+	Activity AS a2 ON a1.event_date +1 = a2.event_date
+WHERE 
+	a1.player_id = a2.player_id
+```
 ### 1174 Immediate Food Delivery 2
 ```
 WITH CTE AS (SELECT customer_id, 
