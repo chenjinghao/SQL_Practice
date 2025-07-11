@@ -1,6 +1,18 @@
 # LeetCode SQL 50 Study Plan
 [Visit the study plan](https://leetcode.com/studyplan/top-sql-50/)
 ## Level: Medium
+### 1054 Customers Who Bought All Products
+```
+SELECT 
+    customer_id
+FROM 
+    Customer
+GROUP BY 
+    customer_id
+HAVING 
+    COUNT(DISTINCT product_key) = (SELECT COUNT(DISTINCT product_key) FROM Product)
+```
+
 ### 1070. Product Sales Analysis III
 ```
 SELECT 
