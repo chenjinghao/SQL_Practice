@@ -1,4 +1,5 @@
 # LeetCode SQL 50 Study Plan
+[Visit the study plan](https://leetcode.com/studyplan/top-sql-50/)
 ## Level: Medium
 ### 550 Game Play Analysis IV
 ```
