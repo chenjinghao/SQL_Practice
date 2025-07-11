@@ -4,13 +4,20 @@
 ### 1070. Product Sales Analysis III
 ```
 SELECT 
-    customer_id
+    product_id, 
+    year as first_year, 
+    quantity, 
+    price
 FROM 
-    Customer
-GROUP BY 
-    customer_id
-HAVING 
-    COUNT(DISTINCT product_key) = (SELECT COUNT(DISTINCT product_key) FROM Product)
+    Sales
+WHERE (product_id, year) IN (
+                                SELECT product_id, 
+                                    MIN(year) AS first_year
+                                FROM 
+                                    Sales
+                                GROUP BY 
+                                    product_id
+                            )
 ```
 ### 550 Game Play Analysis IV
 ```
