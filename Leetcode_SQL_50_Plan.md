@@ -1,6 +1,17 @@
 # LeetCode SQL 50 Study Plan
 [Visit the study plan](https://leetcode.com/studyplan/top-sql-50/)
 ## Level: Medium
+### 1070. Product Sales Analysis III
+```
+SELECT product_id,
+	MIN(year) AS first_year,
+	quantity,
+	price
+FROM
+	Sales
+GROUP BY
+	product_id
+```
 ### 550 Game Play Analysis IV
 ```
 SELECT
