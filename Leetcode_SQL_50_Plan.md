@@ -1,6 +1,33 @@
 # LeetCode SQL 50 Study Plan
 [Visit the study plan](https://leetcode.com/studyplan/top-sql-50/)
 ## Level: Medium
+### 1943 Confirmation Rate
+```
+WITH CTE AS (
+	SELECT
+	    user_id,
+	    SUM(CASE 
+		    WHEN action = 'confirmed' 
+		    THEN 1  
+		    ELSE 0 
+		    END) AS num_cfm,
+	    COUNT(user_id) AS requested
+	FROM
+	    Confirmations
+	Group by 
+	    user_id)
+
+SELECT 
+	s.user_id, 
+    	(CASE 
+	    WHEN requested IS NULL   
+	    THEN 0 
+	    ELSE ROUND((num_cfm / requested), 2) 
+	    END) AS confirmation_rate
+FROM
+    Signups AS s LEFT JOIN
+    CTE ON s.user_id = cte.user_id
+```
 ### 176 Second Highest Salary
 ```
 WITH CTE AS (SELECT 
