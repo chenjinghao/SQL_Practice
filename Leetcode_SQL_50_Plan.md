@@ -82,15 +82,17 @@ LIMIT 1
 ```
     SELECT
         SUBSTRING(trans_date,1,7) as month,
+        --CONCAT(YEAR(trans_date), '-', LPAD(MONTH(trans_date), 2, '0')) AS month,
+        --change to above link can boost up the speed
         country,
         COUNT(*) AS trans_count,
-        CASE 
+        SUM(CASE 
             WHEN state ="approved" THEN 1 ELSE 0 
-        END as approved_count,
+        END) as approved_count,
         SUM(amount) as trans_total_amount, 
-        CASE
+        SUM(CASE
             WHEN state='approved' THEN amount ELSE 0
-        END AS approved_total_amount
+        END) AS approved_total_amount
     FROM
         Transactions
     GROUP BY month, country;
