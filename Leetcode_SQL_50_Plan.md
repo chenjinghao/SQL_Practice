@@ -99,16 +99,21 @@ LIMIT 1
 ```
 WITH CTE AS (
     SELECT managerId,
+        name,
         COUNT(*) as count_report
     FROM Employee
     GROUP BY managerId
     HAVING COUNT(*) >= 5
-)
 
-SELECT  e.name as name
+)
+SELECT
+    e.name as name
 FROM 
     CTE LEFT JOIN
-    Employee as e ON CTE.managerId = e.id
+    Employee AS e ON CTE.managerId = e.id
+WHERE cte.name IS NOT NULL
+    AND CTE.managerId = e.id
+    OR e.id IS NOT NULL;
 ```
 ## Level: Easy
 ### 1757. Recyclable and Low-Fat Products
