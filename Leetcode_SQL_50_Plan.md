@@ -33,13 +33,23 @@ WHERE (product_id, year) IN (
 ```
 ### 550 Game Play Analysis IV
 ```
+--Run time: 493ms
+--Beats 97.52%
+-- @11 July 2025
+
+WITH CTE AS (
+    SELECT player_id, event_date,
+    RANK() OVER(PARTITION BY player_id ORDER BY event_date) AS rank_year
+FROM
+    Activity)
+
 SELECT
-	ROUND(COUNT(*)/(SELECT COUNT(distinct player_id) FROM Activity),2) AS fraction
-FROM 
-	Activity AS a1 LEFT JOIN
-	Activity AS a2 ON a1.event_date +1 = a2.event_date
-WHERE 
-	a1.player_id = a2.player_id
+    ROUND(COUNT(*)/(SELECT COUNT(distinct player_id) FROM Activity),2) AS fraction
+FROM CTE AS c1 LEFT JOIN
+    CTE AS c2 ON c1.player_id = c2.player_id
+WHERE c1.rank_year =1
+    AND c2.rank_year =2
+    AND date_add(c1.event_date, INTERVAL 1 DAY) = c2.event_date
 ```
 ### 1174 Immediate Food Delivery 2
 ```
