@@ -1,6 +1,20 @@
 # LeetCode SQL 50 Study Plan
 [Visit the study plan](https://leetcode.com/studyplan/top-sql-50/)
 ## Level: Medium
+### 176 Second Highest Salary
+```
+WITH CTE AS (SELECT 
+                id,
+                salary, 
+                RANK() OVER(ORDER BY salary DESC) AS ranked
+            FROM Employee
+            GROUP BY salary)
+
+SELECT 
+    MAX(CASE WHEN ranked=2 THEN salary end) AS SecondHighestSalary
+FROM
+    CTE;
+```
 ### 1054 Customers Who Bought All Products
 ```
 SELECT 
