@@ -53,17 +53,30 @@ WHERE c1.rank_year =1
 ```
 ### 1174 Immediate Food Delivery 2
 ```
-WITH CTE AS (SELECT customer_id, 
-        MIN(order_date) AS first_order_date,
-        CASE 
-		WHEN MIN(order_date) = customer_pref_delivery_date 
-	        THEN 1 ELSE 0 
-	END AS immidiate 
-FROM Delivery
-GROUP BY customer_id)
+--Run time: 545 ms
+--Beats 97.95%
+-- @11 July 2025
+WITH CTE AS (
+    SELECT
+        customer_id,
+        order_date, 
+        customer_pref_delivery_date, 
+        RANK() OVER(PARTITION BY customer_id ORDER BY order_date) as rank_year
+    FROM 
+        Delivery)
 
-SELECT ((SUM(immidiate)/COUNT(*))*100) AS immediate_percentage
-FROM CTE
+SELECT 
+		ROUND((
+			(SELECT COUNT(*)
+			FROM cte 
+			WHERE rank_year = 1
+			    AND order_date = customer_pref_delivery_date) / 
+	    (SELECT COUNT(*)
+			FROM cte 
+			WHERE rank_year = 1) * 100),2) AS immediate_percentage
+FROM 
+    Delivery
+LIMIT 1
 ```
 ### 1193 Monthly Transactions 1
 ```
