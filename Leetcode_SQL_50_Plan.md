@@ -1,6 +1,14 @@
 # LeetCode SQL 50 Study Plan
 [Visit the study plan](https://leetcode.com/studyplan/top-sql-50/)
 ## Level: Medium
+### 180 Consecutive Number
+```
+SELECT 
+	DISTINCT l1.num as ConsecutiveNums 
+FROM 
+	Logs AS l1 JOIN Logs AS l2 ON l1.id + 1 = l2.id AND l1.num = l2.num
+			JOIN Logs AS l3 ON l2.id + 1 = l3.id AND l2.num = l3.num;
+```
 ### 1943 Confirmation Rate
 ```
 WITH CTE AS (
