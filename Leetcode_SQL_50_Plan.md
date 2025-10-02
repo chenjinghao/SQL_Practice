@@ -201,3 +201,15 @@ WHERE
     area >= 3000000
     or population >= 25000000;
 ```
+
+### 1757. Recyclable and Low Fat Products
+```
+# Write your MySQL query statement below
+SELECT 
+    product_id
+FROM 
+    Products
+WHERE 
+    low_fats = 'Y' 
+    AND recyclable = 'Y';
+```
