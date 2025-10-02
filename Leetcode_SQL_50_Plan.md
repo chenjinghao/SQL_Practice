@@ -166,6 +166,33 @@ WHERE cte.name IS NOT NULL
     AND CTE.managerId = e.id
     OR e.id IS NOT NULL;
 ```
+### 1164. Product Price at a Given Date
+```
+WITH latest AS (
+  SELECT
+    product_id,
+    new_price,
+    ROW_NUMBER() OVER (
+      PARTITION BY product_id
+      ORDER BY change_date DESC
+    ) AS rn
+  FROM 
+	  Products
+  WHERE 
+	  change_date <= DATE('2019-08-16')
+)
+
+SELECT
+  p.product_id,
+  COALESCE(l.new_price, 10) AS price
+FROM 
+	(SELECT DISTINCT product_id FROM Products) AS p
+	LEFT JOIN latest AS l
+  ON l.product_id = p.product_id 
+	  AND l.rn = 1;
+```
+
+
 ## Level: Easy
 ### 1757. Recyclable and Low-Fat Products
 ```
